@@ -26,7 +26,8 @@ export function logout(){
 export function authUser(type, userData){
     return dispatch => {
         return new Promise((resolve, reject) => {
-            return apiCall("post", `https://warbler-server-mh.herokuapp.com/api/${type}`, userData).then(({token, ...user}) => {
+            debugger;
+            return apiCall("post", `https://warbler-server-mh.herokuapp.com/api/auth/${type}`, userData).then(({token, ...user}) => {
                 localStorage.setItem("jwtToken", token);
                 setAuthorizationToken(token);
                 dispatch(setCurrentUser(user));
