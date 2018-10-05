@@ -16,7 +16,7 @@ export const removeMessage = (user_id, message_id) => {
     return dispatch => {
         return apiCall(
             "delete",
-            `/api/users/${user_id}/messages/${message_id}`
+            `https://warbler-server-mh.herokuapp.com/api/users/${user_id}/messages/${message_id}`
         ).then(() => dispatch(remove(message_id)))
         .catch(err => addError(err.message));
     }
@@ -24,7 +24,7 @@ export const removeMessage = (user_id, message_id) => {
 
 export const fetchMessages = () => {
     return dispatch => {
-        return apiCall("get", "/api/messages")
+        return apiCall("get", "https://warbler-server-mh.herokuapp.com/api/messages")
             .then( res => dispatch(loadMessages(res)))
             .catch( err => dispatch(addError(err.message)));
     }
@@ -33,7 +33,7 @@ export const fetchMessages = () => {
 export const postNewMessage = text => (dispatch, getState) => {
     let { currentUser } = getState();
     const id = currentUser.user.id
-    return apiCall("post", `/api/users/${id}/messages`, { text })
+    return apiCall("post", `https://warbler-server-mh.herokuapp.com/api/users/${id}/messages`, { text })
         .then( res => {} )
         .catch( err => dispatch(addError(err.message)) )
 };
